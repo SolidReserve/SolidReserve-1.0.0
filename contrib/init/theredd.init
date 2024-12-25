@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  solidreserved The solidreserve core server.
+#
+#
+# chkconfig: 345 80 20
+# description: solidreserved
+# processname: solidreserved
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/solidreserved, see below
+if [ -f /etc/sysconfig/solidreserved ]; then
+        . /etc/sysconfig/solidreserved
+fi
+
+RETVAL=0
+
+prog=solidreserved
+# you can override the lockfile via SOLIDRESERVED_LOCKFILE in /etc/sysconfig/solidreserved
+lockfile=${SOLIDRESERVED_LOCKFILE-/var/lock/subsys/solidreserved}
+
+# solidreserved defaults to /usr/bin/solidreserved, override with SOLIDRESERVED_BIN
+solidreserved=${SOLIDRESERVED_BIN-/usr/bin/solidreserved}
+
+# solidreserved opts default to -disablewallet, override with SOLIDRESERVED_OPTS
+solidreserved_opts=${SOLIDRESERVED_OPTS}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $solidreserved $solidreserved_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

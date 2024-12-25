@@ -1,0 +1,86 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout
+#
+if [ -d "/var/lib/solidreserve/.solidreserve" ]; then
+	SOLIDRESERVED_DEFAULT_DATADIR="/var/lib/solidreserve/.solidreserve"
+else
+	SOLIDRESERVED_DEFAULT_DATADIR="/var/lib/solidreserved"
+fi
+
+SOLIDRESERVED_CONFIGFILE=${SOLIDRESERVED_CONFIGFILE:-/etc/solidreserve/solidreserve.conf}
+SOLIDRESERVED_PIDDIR=${SOLIDRESERVED_PIDDIR:-/var/run/solidreserved}
+SOLIDRESERVED_PIDFILE=${SOLIDRESERVED_PIDFILE:-${SOLIDRESERVED_PIDDIR}/solidreserved.pid}
+SOLIDRESERVED_DATADIR=${SOLIDRESERVED_DATADIR:-${SOLIDRESERVED_DEFAULT_DATADIR}}
+SOLIDRESERVED_USER=${SOLIDRESERVED_USER:-solidreserve}
+SOLIDRESERVED_GROUP=${SOLIDRESERVED_GROUP:-solidreserve}
+SOLIDRESERVED_BIN=${SOLIDRESERVED_BIN:-/usr/bin/solidreserved}
+
+name="solidreserve Core Daemon"
+description="solidreserve crypto-currency p2p network daemon"
+
+command="/usr/bin/solidreserved"
+command_args="-pid=\"${SOLIDRESERVED_PIDFILE}\" \
+		-conf=\"${SOLIDRESERVED_CONFIGFILE}\" \
+		-datadir=\"${SOLIDRESERVED_DATADIR}\" \
+		-daemon \
+		${SOLIDRESERVED_OPTS}"
+
+required_files="${SOLIDRESERVED_CONFIGFILE}"
+start_stop_daemon_args="-u ${SOLIDRESERVED_USER} \
+			-N ${SOLIDRESERVED_NICE:-0} -w 2000"
+pidfile="${SOLIDRESERVED_PIDFILE}"
+retry=60
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${SOLIDRESERVED_USER}:${SOLIDRESERVED_GROUP}" \
+	"${SOLIDRESERVED_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${SOLIDRESERVED_USER}:${SOLIDRESERVED_GROUP}" \
+	"${SOLIDRESERVED_PIDDIR}"
+
+	checkpath -f \
+	-o ${SOLIDRESERVED_USER}:${SOLIDRESERVED_GROUP} \
+	-m 0660 \
+	${SOLIDRESERVED_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${SOLIDRESERVED_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run solidreserved."
+		eerror "The setting must appear in ${SOLIDRESERVED_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is also recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"solidreserve Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

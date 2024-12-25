@@ -1,0 +1,1 @@
+qt/libsolidreserveqt_a-qrc_solidreserve.o: qt/qrc_solidreserve.cpp

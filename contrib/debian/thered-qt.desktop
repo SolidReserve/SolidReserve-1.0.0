@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=solidreserve
+Comment=solidreserve P2P Cryptocurrency
+Comment[fr]=solidreserve, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=solidreserve, eşten eşe kriptografik sanal para birimi
+Exec=solidreserve-qt %u
+Terminal=false
+Type=Application
+Icon=solidreserve128
+MimeType=x-scheme-handler/solidreserve;
+Categories=Office;Finance;

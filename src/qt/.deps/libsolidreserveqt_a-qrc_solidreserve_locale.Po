@@ -1,0 +1,2 @@
+qt/libsolidreserveqt_a-qrc_solidreserve_locale.o: \
+ qt/qrc_solidreserve_locale.cpp

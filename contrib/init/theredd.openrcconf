@@ -1,0 +1,26 @@
+# /etc/conf.d/solidreserved: config file for /etc/init.d/solidreserved
+
+# Config file location
+#SOLIDRESERVED_CONFIGFILE="/etc/solidreserve/solidreserve.conf"
+
+# What directory to write pidfile to?  (created and owned by $SOLIDRESERVED_USER)
+#SOLIDRESERVED_PIDDIR="/var/run/solidreserved"
+
+# What filename to give the pidfile
+#SOLIDRESERVED_PIDFILE="${SOLIDRESERVED_PIDDIR}/solidreserved.pid"
+
+# Where to write solidreserved data (be mindful that the blockchain is large)
+#SOLIDRESERVED_DATADIR="/var/lib/solidreserved"
+
+# User and group to own solidreserved process
+#SOLIDRESERVED_USER="solidreserve"
+#SOLIDRESERVED_GROUP="solidreserve"
+
+# Path to solidreserved executable
+#SOLIDRESERVED_BIN="/usr/bin/solidreserved"
+
+# Nice value to run solidreserved under
+#SOLIDRESERVED_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+SOLIDRESERVED_OPTS=""
