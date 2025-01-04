@@ -2,9 +2,6 @@
 
 # SolidReserve (OLID) - Cryptocurrency for the Future
 
-[![Build Status](https://travis-ci.org/SolidReserve-Project/SolidReserve.svg?branch=master)](https://travis-ci.org/SolidReserve-Project/SolidReserve)  
-[![GitHub version](https://badge.fury.io/gh/SolidReserve-Project%2FSolidReserve.svg)](https://badge.fury.io/gh/SolidReserve-Project%2FSolidReserve)
-
 **SolidReserve (OLID)** is a next-generation cryptocurrency designed to provide advanced privacy, quantum computing resistance, and a solid economic foundation as a store of value. With a limited supply and unique features, SolidReserve is poised to become one of the most trusted and stable cryptocurrencies for the future.
 
 ### Key Features
