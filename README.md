@@ -1,5 +1,3 @@
----
-
 # SolidReserve (OLID) - Cryptocurrency for the Future
 
 **SolidReserve (OLID)** is a next-generation cryptocurrency designed to provide advanced privacy, quantum computing resistance, and a solid economic foundation as a store of value. With a limited supply and unique features, SolidReserve is poised to become one of the most trusted and stable cryptocurrencies for the future.
