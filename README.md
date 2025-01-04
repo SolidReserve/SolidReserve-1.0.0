@@ -1,7 +1,3 @@
-Aquí tienes la versión profesional y mejorada en **inglés**, con los puertos integrados directamente en los **details** de la moneda para mayor claridad:  
-
----
-
 # **SolidReserve (OLID) - The Next-Generation Cryptocurrency**
 
 SolidReserve (**OLID**) is a cryptocurrency built for privacy, quantum-resistance, and economic stability. Designed to function as a solid reserve of value, it combines cutting-edge technology with user-friendly features, making it a strong contender in the digital finance space.
