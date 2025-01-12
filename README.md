@@ -108,7 +108,7 @@ SolidReserve supports:
 
 - [Official Website](https://sites.google.com/view/solidreserve-olid)  
 - [Block Explorer](https://explorer.solidreserve.com)  
-- [Community Forum](https://forum.solidreserve.com)  
+- [Community Forum](https://discord.gg/TZz7mE7rtM))  
 - [Technical Documentation](https://docs.solidreserve.com)  
 
 ---
